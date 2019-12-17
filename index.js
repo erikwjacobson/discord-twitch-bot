@@ -13,12 +13,17 @@ const auth = JSON.parse(authJson)
  *   !subgrade <twitch username>
  *  Then makes subsequent requests to check if they are in the subscription.
  */
-clientDiscord.on('message', (msg) => {
+clientDiscord.on('message', async (msg) => {
     user = msg.author
     command = 'subgrade'
     message = msg.content.split(' ')
     if(message.length == 2 && message[0] === '!' + command && !user.bot) {
-        handleMessage(message[1])
+        var sub = await handleMessage(message[1])
+        if(!sub) {
+            console.log('User is not subscribed')
+        } else {
+            console.log('User is subscribed') // TODO handle discord permissions
+        }
     }
 })
 

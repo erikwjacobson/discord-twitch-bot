@@ -50,7 +50,6 @@ async function makeTokenRequest() {
 
 /**
  * Handle a user being passed in if going with the !command route.
- * 
  * @param {*} user 
  */
 async function handleMessage(user) {
@@ -58,11 +57,13 @@ async function handleMessage(user) {
     var tokenRequest = await makeTokenRequest()
 
     // Make request to Discord to get Twitch Information
-    checkSubscription(user).then(response => { 
-        console.log(response.data) // TODO Figure out how to handle the response data.
+    var sub = checkSubscription(user).then(response => { 
+        var sub = response.data.data[0]
+        return sub
     }).catch(error => {
         console.log(error)
     })
+    return sub
 }
 
 module.exports.handleMessage = handleMessage;
