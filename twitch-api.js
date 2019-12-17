@@ -57,8 +57,8 @@ async function handleMessage(user) {
     var tokenRequest = await makeTokenRequest()
 
     // Make request to Discord to get Twitch Information
-    checkSubscription(user).then(response => { // TODO Fix parameters
-        console.log(response.data)
+    checkSubscription(user).then(response => { 
+        console.log(response.data) // TODO Figure out how to handle the response data.
     }).catch(error => {
         console.log(error)
     })
