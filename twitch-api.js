@@ -50,6 +50,7 @@ async function makeTokenRequest() {
 
 /**
  * Handle a user being passed in if going with the !command route.
+ * 
  * @param {*} user 
  */
 async function handleMessage(user) {
