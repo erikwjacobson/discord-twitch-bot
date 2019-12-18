@@ -1,12 +1,20 @@
+// Dependencies
 const axios = require('axios').default
 var discord = require('discord.js')
 const fs = require('fs')
 var handleMessage = require('./twitch-api.js').handleMessage
 
-const clientDiscord = new discord.Client()
+// Get auth credentials from auth.json
 var authJson = fs.readFileSync("auth.json")
 const auth = JSON.parse(authJson)
 
+// Establish client instance
+const clientDiscord = new discord.Client()
+
+// Ensure bot is online
+clientDiscord.on('ready', function() {
+    console.log('Bot is now connected');
+})
 
 /**
  *  Checks if the command is in this format: 
@@ -23,12 +31,19 @@ clientDiscord.on('message', async (msg) => {
             console.log('User is not subscribed')
         } else {
             console.log('User is subscribed') // TODO handle discord permissions
+            handleDiscordUpgrade(user)
         }
     }
 })
 
-clientDiscord.on('ready', function() {
-    console.log('Bot is now connected');
-})
+/**
+ * Handle the requests to Discord to give people with subs access to certain channels
+ * 
+ * @param {*} user 
+ */
+function handleDiscordUpgrade(user) {
+    // TODO
+}
 
+// Login
 clientDiscord.login(auth.discord.secret);
